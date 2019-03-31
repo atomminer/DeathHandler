@@ -626,12 +626,12 @@ void DeathHandler::HandleSignal(int sig, void * /* info */, void *secret) {
           if (color_output_) {
             strcat(msg, "\033[0m");  // NOLINT(runtime/printf)
           }
-          strcat(msg, "\n");  // NOLINT(runtime/printf)
+          strcat(msg, " @ ");
         } else {
           if (color_output_) {
             strcat(msg, "\033[0m");  // NOLINT(runtime/printf)
           }
-          strcat(msg, "\n");  // NOLINT(runtime/printf)
+          strcat(msg, " @ ");
         }
         print(msg);
       }
