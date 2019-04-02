@@ -523,8 +523,12 @@ void DeathHandler::HandleSignal(int sig, void * /* info */, void *secret) {
     if (color_output_) {
       strcat(msg, "\033[33;1m");  // NOLINT(runtime/printf)
     }
+    char ptName[32] = {0}; // on the stack, should be completely fine
+    pthread_getname_np(pthread_self(), ptName, 32);
+    strcat(msg, ptName);
+    strcat(msg, ": 0x");
   #ifndef __APPLE__
-    strcat(msg, Safe::utoa(pthread_self(), msg + msg_max_length));  // NOLINT(*)
+    strcat(msg, Safe::utoa(pthread_self(), msg + msg_max_length, 16));  // NOLINT(*)
   #else
     strcat(msg, Safe::ptoa(pthread_self(), msg + msg_max_length));  // NOLINT(*)
   #endif
